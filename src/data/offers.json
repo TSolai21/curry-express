@@ -45,9 +45,9 @@
     "badgeColor": "saffron",
     "subtitle": null,
     "description": "Testing...",
-    "price": "20",
-    "originalPrice": "40",
-    "image": "/uploads/1779529902600-4ug41m.jpg",
+    "price": "$20",
+    "originalPrice": "$40",
+    "image": "/uploads/1779536718443-dzy7jd.png",
     "colSpan": 1,
     "rowSpan": 1
   }
