@@ -1,0 +1,54 @@
+[
+  {
+    "id": "1",
+    "title": "Family Feast Combo",
+    "badge": "Most Popular",
+    "badgeColor": "saffron",
+    "subtitle": "Limited Time Offer",
+    "description": "2 Curries · 1 Biryani · 4 Naans · 2 Drinks · Dessert for 2.",
+    "price": "$36.99",
+    "originalPrice": "$54.00",
+    "image": "https://images.pexels.com/photos/6260921/pexels-photo-6260921.jpeg?auto=compress&cs=tinysrgb&w=1200&q=85",
+    "colSpan": 2,
+    "rowSpan": 2
+  },
+  {
+    "id": "2",
+    "title": "Express Lunch Box",
+    "badge": "Lunch Deal",
+    "badgeColor": "crimson",
+    "subtitle": "",
+    "description": "1 Curry + Rice + Naan + Drink.",
+    "price": "$11.99",
+    "originalPrice": "$16.00",
+    "image": "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800&q=85",
+    "colSpan": 1,
+    "rowSpan": 1
+  },
+  {
+    "id": "3",
+    "title": "Indo-Chinese Party Pack",
+    "badge": "🎉 Weekend Special",
+    "badgeColor": "transparent",
+    "subtitle": "",
+    "description": "Noodles + Fried Rice + Manchurian + 4 Drinks.",
+    "price": "$28.99",
+    "originalPrice": "$40.00",
+    "image": "https://images.pexels.com/photos/3186654/pexels-photo-3186654.jpeg?auto=compress&cs=tinysrgb&w=800&q=85",
+    "colSpan": 1,
+    "rowSpan": 1
+  },
+  {
+    "id": "1779529902606",
+    "title": "Weekend sale",
+    "badge": "Off",
+    "badgeColor": "saffron",
+    "subtitle": null,
+    "description": "Testing...",
+    "price": "20",
+    "originalPrice": "40",
+    "image": "/uploads/1779529902600-4ug41m.jpg",
+    "colSpan": 1,
+    "rowSpan": 1
+  }
+]

@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-black: #0a0908;
+  --color-charcoal: #111210;
+  --color-surface: #161614;
+  --color-surface-2: #1e1d1a;
+  --color-surface-3: #252420;
+  --color-saffron: #f4a015;
+  --color-saffron-light: #ffbe47;
+  --color-saffron-dark: #c17d0a;
+  --color-crimson: #c0392b;
+  --color-gold: #d4af37;
+  --color-cream: #f5edd6;
+  --color-muted: #7a7770;
+  --color-brand-text: #e8e0d0;
+  --color-brand-text-dim: #a09880;
+  --color-brand-border: rgba(244,160,21,0.15);
+
+  --radius-DEFAULT: 12px;
+  --radius-lg: 20px;
+
+  --font-display: var(--font-playfair);
+  --font-serif: var(--font-cormorant);
+  --font-sans: var(--font-outfit);
+}
+
+:root {
+  --background: #0a0908;
+  --foreground: #e8e0d0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-black); }
+::-webkit-scrollbar-thumb { background: var(--color-saffron-dark); border-radius: 2px; }
+
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-12px); } }
+@keyframes pulse-glow { 0%,100% { box-shadow:0 0 20px rgba(244,160,21,0.4); } 50% { box-shadow:0 0 40px rgba(244,160,21,0.8),0 0 80px rgba(244,160,21,0.2); } }
+@keyframes scroll-left { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@keyframes ken-burns { 0% { transform:scale(1) translate(0,0); } 100% { transform:scale(1.08) translate(-1%,-1%); } }
+
+@utility animate-float { animation: float 7s ease-in-out infinite; }
+@utility animate-pulse-glow { animation: pulse-glow 2s infinite; }
+@utility animate-scroll-left { animation: scroll-left 28s linear infinite; }
+@utility animate-scroll-left-slow { animation: scroll-left 45s linear infinite; }
+@utility animate-ken-burns { animation: ken-burns 18s ease-in-out infinite alternate; }
+
+@layer utilities {
+  .section-label {
+    @apply font-sans text-[11px] font-semibold tracking-[0.3em] uppercase text-saffron flex items-center gap-3;
+  }
+  .section-label::before {
+    content: '';
+    @apply block w-8 h-px bg-saffron;
+  }
+
+  .section-title {
+    @apply font-display text-[clamp(2.2rem,5vw,3.8rem)] font-bold leading-tight text-cream;
+  }
+  .section-title em {
+    @apply italic text-saffron;
+  }
+}
