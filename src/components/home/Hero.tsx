@@ -87,40 +87,40 @@ export const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/35" />
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
 
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 pt-[140px] pb-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
-        <motion.div 
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 pt-[80px] pb-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, staggerChildren: 0.2 }}
         >
 
-          
-          <motion.h1 
+
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="font-display text-[clamp(2.8rem,5.5vw,5rem)] font-black leading-[1.05] text-cream mb-5 lg:mb-10"
           >
-            Bold Indian Flavors.<br/>
+            Bold Indian Flavors.<br />
             <span className="block text-saffron italic">Express Chinese Cravings.</span>
           </motion.h1>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="flex lg:hidden relative items-center justify-center w-full mb-10"
           >
             {sliderContent}
           </motion.div>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="font-serif text-xl font-light text-cream/70 mb-10 italic"
           >
             Where ancient spice routes meet the modern table — crafted for those who refuse to choose.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-wrap gap-4 justify-center lg:justify-start"
@@ -128,8 +128,8 @@ export const Hero = () => {
             <Button href="https://www.doordash.com">Order on DoorDash</Button>
             <Button variant="ghost" href="#menu">Explore Menu</Button>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-wrap gap-8 mt-12 pt-10 border-t border-saffron/20 justify-center lg:justify-start"
@@ -141,11 +141,11 @@ export const Hero = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.6 }}
-          className="hidden lg:flex relative items-center justify-center w-full"
+          className="hidden lg:flex relative items-center justify-center w-full lg:-translate-y-12"
         >
           {sliderContent}
         </motion.div>

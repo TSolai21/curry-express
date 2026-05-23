@@ -34,10 +34,10 @@ export const Navbar = () => {
         <a href="https://www.doordash.com" target="_blank" rel="noopener" className="mt-6 bg-saffron text-black py-4 rounded-lg text-center font-bold">Order on DoorDash</a>
       </div>
 
-      <nav className={`${isMenuPage ? 'absolute' : 'fixed'} top-0 left-0 right-0 z-[1000] transition-all duration-500 ${!isMenuPage && scrolled ? 'bg-black/95 backdrop-blur-md py-3 border-b border-brand-border' : 'py-5'}`}>
+      <nav className={`${isMenuPage ? 'absolute' : 'fixed'} top-0 left-0 right-0 z-[1000] transition-all duration-500 ${!isMenuPage && scrolled ? 'bg-black/40 backdrop-blur-xl py-2 border-b border-brand-border' : 'py-3'}`}>
         <div className="max-w-[1280px] mx-auto px-6 flex items-center justify-between">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="Curry Express" width={300} height={100} className="h-20 w-auto object-contain" priority />
+            <Image src="/logo.png" alt="Curry Express" width={200} height={60} className="h-12 md:h-14 w-auto object-contain" priority />
           </Link>
           
           <ul className="hidden md:flex items-center gap-8 list-none">
