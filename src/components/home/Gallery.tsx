@@ -42,9 +42,9 @@ export const Gallery = () => {
               className="break-inside-avoid rounded-xl overflow-hidden relative cursor-pointer border border-white/5 group"
             >
               <div className="relative overflow-hidden">
-                <img src={img.src} alt={img.title} className="w-full block object-cover transition-transform duration-600 group-hover:scale-105" />
+                <img src={img.src} alt={img.title} className="w-full block object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85 opacity-0 transition-opacity duration-400 flex items-end p-4.5 group-hover:opacity-100">
-                  <div className="font-display text-base font-bold text-cream">{img.title}</div>
+                  <div className="font-serif text-[1.4rem] font-bold text-cream">{img.title}</div>
                 </div>
               </div>
             </motion.div>

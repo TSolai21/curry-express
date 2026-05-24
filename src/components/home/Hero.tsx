@@ -1,13 +1,40 @@
 "use client";
+import { useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
-import { motion } from 'framer-motion';
+import { FaChevronDown } from 'react-icons/fa';
+import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { fullMenuData } from '@/components/menu/MenuData';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectCards } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
 
+import { useRef } from 'react';
+import { useInView } from 'framer-motion';
+
+const Counter = ({ from, to, duration = 2, decimals = 0 }: { from: number, to: number, duration?: number, decimals?: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const count = useMotionValue(from);
+  const rounded = useTransform(count, (latest) => {
+    if (decimals > 0) return latest.toFixed(decimals);
+    return Math.round(latest).toString();
+  });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, to, { duration, ease: "easeOut", delay: 0.1 });
+      return controls.stop;
+    }
+  }, [count, to, duration, isInView]);
+
+  return <motion.span ref={ref}>{rounded}</motion.span>;
+};
+
 export const Hero = () => {
+  const allItems = Object.values(fullMenuData).flat();
+
   const sliderContent = (
     <Swiper
       effect={'cards'}
@@ -17,77 +44,26 @@ export const Hero = () => {
       loop={true}
       className="w-[280px] h-[380px] sm:w-[340px] sm:h-[460px]"
     >
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Butter Chicken" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Butter Chicken</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Biryani Royale" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Biryani Royale</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/2347311/pexels-photo-2347311.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Hakka Noodles" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Hakka Noodles</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/2089712/pexels-photo-2089712.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Paneer Tikka" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Paneer Tikka</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/10580198/pexels-photo-10580198.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Chilli Chicken" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Chilli Chicken</div>
-        </div>
-      </SwiperSlide>
-      {/* Duplicated slides to satisfy Swiper's loop requirement for cards effect */}
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Butter Chicken" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Butter Chicken</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Biryani Royale" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Biryani Royale</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/2347311/pexels-photo-2347311.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Hakka Noodles" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Hakka Noodles</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/2089712/pexels-photo-2089712.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Paneer Tikka" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Paneer Tikka</div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-        <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10">
-          <img src="https://images.pexels.com/photos/10580198/pexels-photo-10580198.jpeg?auto=compress&cs=tinysrgb&w=600&q=85" alt="Chilli Chicken" className="w-full h-full object-cover" />
-          <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/90 to-transparent font-display text-lg font-bold text-cream">Chilli Chicken</div>
-        </div>
-      </SwiperSlide>
+      {allItems.map((item, idx) => (
+        <SwiperSlide key={idx}>
+          <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-surface">
+            <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+            <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/95 via-black/80 to-transparent font-serif text-2xl font-bold text-cream leading-tight">
+              {item.name.replace(/ \(.*\)/, '')}
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 
   return (
     <section id="hero" className="min-h-screen relative flex items-center overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80')] bg-cover bg-center animate-ken-burns" />
+      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80')] bg-cover bg-center animate-ken-burns" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/35" />
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
 
-      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 pt-[80px] pb-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center text-center lg:text-left">
+      <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 pt-[100px] pb-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center text-center lg:text-left">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -98,7 +74,7 @@ export const Hero = () => {
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-display text-[clamp(2.8rem,5.5vw,5rem)] font-black leading-[1.05] text-cream mb-5 lg:mb-10"
+            className="font-display text-[clamp(2.5rem,5vw,4.5rem)] font-black leading-[1.05] text-cream mb-4 lg:mb-6"
           >
             Bold Indian Flavors.<br />
             <span className="block text-saffron italic">Express Chinese Cravings.</span>
@@ -107,7 +83,7 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex lg:hidden relative items-center justify-center w-full mb-10"
+            className="flex lg:hidden relative items-center justify-center w-full mb-6"
           >
             {sliderContent}
           </motion.div>
@@ -115,7 +91,7 @@ export const Hero = () => {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="font-serif text-xl font-light text-cream/70 mb-10 italic"
+            className="font-serif text-lg lg:text-xl font-light text-cream/70 mb-8 italic"
           >
             Where ancient spice routes meet the modern table — crafted for those who refuse to choose.
           </motion.p>
@@ -132,12 +108,12 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="flex flex-wrap gap-8 mt-12 pt-10 border-t border-saffron/20 justify-center lg:justify-start"
+            className="flex flex-wrap gap-8 mt-8 pt-8 border-t border-saffron/20 justify-center lg:justify-start"
           >
-            <div><div className="font-display text-3xl font-bold text-cream leading-none">4.9<span className="text-saffron">★</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Rating</div></div>
-            <div><div className="font-display text-3xl font-bold text-cream leading-none">2k<span className="text-saffron">+</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Reviews</div></div>
-            <div><div className="font-display text-3xl font-bold text-cream leading-none">30<span className="text-saffron">+</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Dishes</div></div>
-            <div><div className="font-display text-3xl font-bold text-cream leading-none">15<span className="text-saffron">min</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Avg. Delivery</div></div>
+            <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={4.9} decimals={1} duration={4} /><span className="text-saffron">★</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Rating</div></div>
+            <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={2} duration={4.5} />k<span className="text-saffron">+</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Reviews</div></div>
+            <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={allItems.length} duration={5} /><span className="text-saffron">+</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Dishes</div></div>
+            <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={15} duration={4.5} /><span className="text-saffron">min</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Avg. Delivery</div></div>
           </motion.div>
         </motion.div>
 
@@ -150,6 +126,20 @@ export const Hero = () => {
           {sliderContent}
         </motion.div>
       </div>
+
+      <motion.a 
+        href="#menu"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 8, 0] }}
+        transition={{ 
+          opacity: { delay: 1.5, duration: 1 },
+          y: { repeat: Infinity, duration: 2, ease: "easeInOut" }
+        }}
+        className="absolute bottom-4 lg:bottom-6 left-1/2 -translate-x-1/2 z-20 w-12 h-12 flex items-center justify-center rounded-full border border-saffron/30 text-saffron hover:bg-saffron hover:text-black transition-all"
+        aria-label="Scroll down to menu"
+      >
+        <FaChevronDown />
+      </motion.a>
     </section>
   );
 };

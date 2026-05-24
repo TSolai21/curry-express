@@ -1,5 +1,4 @@
 "use client";
-import { Button } from '@/components/ui/Button';
 import { motion } from 'framer-motion';
 
 export const Offers = ({ offers = [] }: { offers?: any[] }) => {
@@ -8,53 +7,102 @@ export const Offers = ({ offers = [] }: { offers?: any[] }) => {
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="flex justify-between items-end mb-12 flex-wrap gap-6">
           <div>
-            <div className="section-label mb-4">Special Offers</div>
-            <h2 className="section-title">Feast <em>More</em>, Spend <em>Less</em></h2>
+            <div className="text-[#ebb046] text-[11px] font-bold tracking-[0.25em] uppercase mb-4">Special Offers</div>
+            <h2 className="font-display text-[clamp(2.5rem,4vw,3.5rem)] text-white leading-[1.15]">Feast <em>More</em>, Spend <em>Less</em></h2>
           </div>
-          <Button variant="outline" href="https://www.doordash.com">Claim on DoorDash</Button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {offers.map((offer) => {
             const isLarge = offer.colSpan === 2;
-            const sizeClass = isLarge ? 'lg:col-span-2 lg:row-span-2 min-h-[480px]' : 'min-h-[220px]';
-            const titleClass = isLarge ? 'text-[2.5rem]' : 'text-[1.8rem]';
-            const priceClass = isLarge ? 'text-3xl md:text-5xl' : 'text-[1.8rem]';
-            
-            let badgeClass = 'bg-white/10 text-white border border-white/25';
-            if (offer.badgeColor === 'saffron') badgeClass = 'bg-saffron text-black';
-            if (offer.badgeColor === 'crimson') badgeClass = 'bg-crimson text-white';
 
+            if (isLarge) {
+              return (
+                <motion.div 
+                  key={offer.id}
+                  whileHover={{ y: -4 }}
+                  className="lg:col-span-2 lg:row-span-2 min-h-[480px] bg-[#141414] rounded-[1.5rem] overflow-hidden relative border border-white/5 flex flex-col justify-end p-10 group"
+                >
+                  <div className="absolute inset-0">
+                    <img src={offer.image} alt={offer.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
+                  </div>
+                  
+                  <div className="relative z-10 w-full lg:w-[85%]">
+                    <div className="flex items-center gap-0 mb-5">
+                      {offer.badge && (
+                        <span className="bg-[#ebb046] text-black px-3.5 py-1.5 text-[9px] font-bold tracking-[0.15em] uppercase">
+                          {offer.badge}
+                        </span>
+                      )}
+                      {offer.subtitle && (
+                        <span className="bg-white/10 backdrop-blur-md text-white/90 px-3.5 py-1.5 text-[9px] font-bold tracking-[0.15em] uppercase">
+                          {offer.subtitle}
+                        </span>
+                      )}
+                    </div>
+                    
+                    <h3 className="font-serif text-white text-[3rem] leading-[1.1] mb-3">
+                      {offer.title}
+                    </h3>
+                    
+                    <p className="text-white/60 text-[15px] mb-8 font-sans">
+                      {offer.description}
+                    </p>
+                    
+                    <div className="flex items-center gap-6 mt-2 flex-wrap">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-[#ebb046] text-[2.2rem] font-sans font-bold">{offer.price}</span>
+                        <span className="text-white/30 text-[1.2rem] line-through font-sans">{offer.originalPrice}</span>
+                      </div>
+                      
+                      <a href="https://www.doordash.com" target="_blank" rel="noopener noreferrer" className="bg-[#ebb046] text-black px-8 py-3.5 rounded-[0.5rem] text-[11px] font-bold tracking-[0.15em] uppercase hover:bg-white transition-colors shrink-0">
+                        ORDER ON DOORDASH
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            }
+
+            // Small Card Layout
             return (
               <motion.div 
                 key={offer.id}
                 whileHover={{ y: -4 }}
-                className={`${sizeClass} rounded-xl overflow-hidden relative cursor-pointer border border-transparent hover:border-brand-border group`}
+                className="lg:col-span-1 min-h-[230px] bg-[#141414] rounded-[1.5rem] overflow-hidden flex flex-row border border-[#222] relative group"
               >
-                <div className="absolute inset-0">
-                  <img src={offer.image} alt={offer.title} className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-br from-black/90 to-black/55" />
-                </div>
-                <div className="relative z-10 p-9 h-full flex flex-col justify-end">
+                {/* Left Content Area */}
+                <div className="flex-1 p-7 pr-2 flex flex-col justify-center relative z-10 w-[55%]">
                   {offer.badge && (
-                    <span className={`inline-block px-3.5 py-1.5 ${badgeClass} text-[11px] font-extrabold tracking-[0.15em] uppercase rounded-full mb-3.5 self-start`}>
-                      {offer.badge}
+                    <span className="text-[#ebb046] text-[9px] font-bold tracking-[0.2em] uppercase mb-4">
+                      {offer.badge.replace(/[^a-zA-Z\s]/g, '').trim()}
                     </span>
                   )}
-                  {offer.subtitle && (
-                    <div className="flex items-center gap-2 text-xs text-saffron font-medium mb-3.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-saffron animate-pulse-glow" /> {offer.subtitle}
-                    </div>
-                  )}
-                  <h3 className={`font-display ${titleClass} font-bold text-cream leading-[1.2] mb-2.5`}>{offer.title}</h3>
-                  <p className="text-[13px] text-cream/70 mb-5 leading-[1.6]">{offer.description}</p>
-                  <div className="flex items-baseline gap-2.5 mb-6">
-                    <span className={`font-display ${priceClass} font-bold text-saffron`}>{offer.price}</span>
-                    <span className="text-base text-muted line-through">{offer.originalPrice}</span>
+                  
+                  <h3 className="font-serif text-white text-[1.4rem] leading-[1.2] mb-2">
+                    {offer.title}
+                  </h3>
+                  
+                  <p className="text-white/50 text-[12px] italic mb-6 leading-relaxed line-clamp-2">
+                    {offer.description}
+                  </p>
+                  
+                  <div className="flex items-baseline gap-2 mb-5">
+                    <span className="text-[#ebb046] text-[1.3rem] font-sans font-bold">{offer.price}</span>
+                    <span className="text-white/30 text-[0.9rem] line-through font-sans">{offer.originalPrice}</span>
                   </div>
-                  <Button href="https://www.doordash.com" className={isLarge ? "w-full justify-center" : "!text-[11px] !py-2.5 !px-5"}>
-                    {isLarge ? 'Order on DoorDash' : 'Order Now →'}
-                  </Button>
+                  
+                  <a href="https://www.doordash.com" target="_blank" rel="noopener noreferrer" className="text-white text-[10px] font-bold tracking-[0.15em] uppercase inline-flex items-center gap-1.5 group/link w-max">
+                    <span className="border-b border-white/30 pb-0.5 group-hover/link:border-[#ebb046] group-hover/link:text-[#ebb046] transition-colors">ORDER NOW</span>
+                    <span className="group-hover/link:text-[#ebb046] transition-colors">&rarr;</span>
+                  </a>
+                </div>
+                
+                {/* Right Image Area */}
+                <div className="w-[45%] shrink-0 relative h-full">
+                  <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#141414] to-transparent z-10" />
+                  <img src={offer.image} alt={offer.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
                 </div>
               </motion.div>
             );

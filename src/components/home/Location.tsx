@@ -14,8 +14,8 @@ export const Location = () => {
                 <FaMapMarkerAlt />
               </div>
               <div>
-                <h3 className="text-[11px] font-bold tracking-[0.15em] uppercase text-saffron mb-1.5">Contact Us</h3>
-                <p className="text-[15px] text-brand-text leading-[1.6]">123 Spice Route Ave<br/>Seattle, WA 98101</p>
+                <h3 className="text-[11px] font-bold tracking-[0.15em] uppercase text-saffron mb-1.5">Location</h3>
+                <p className="text-[15px] text-brand-text leading-[1.6]">15190 Walden Rd<br/>Montgomery, TX 77356</p>
               </div>
             </div>
 
@@ -25,7 +25,7 @@ export const Location = () => {
               </div>
               <div>
                 <h3 className="text-[11px] font-bold tracking-[0.15em] uppercase text-saffron mb-1.5">Contact</h3>
-                <p className="text-[15px] text-brand-text leading-[1.6]"><a href="tel:+12065550199" className="hover:text-saffron">(206) 555-0199</a><br/><a href="mailto:hello@curryexpress.com" className="hover:text-saffron">hello@curryexpress.com</a></p>
+                <p className="text-[15px] text-brand-text leading-[1.6]"><a href="tel:+13468631124" className="hover:text-saffron">+1 (346) 863-1124</a></p>
               </div>
             </div>
 
@@ -35,11 +35,8 @@ export const Location = () => {
               </div>
               <div className="flex-1">
                 <h3 className="text-[11px] font-bold tracking-[0.15em] uppercase text-saffron mb-1.5">Hours</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-1">
-                  <div className="flex justify-between text-[13px] text-brand-text-dim py-1"><span className="text-brand-text">Mon - Thu</span><span>11:00 AM - 10:00 PM</span></div>
-                  <div className="flex justify-between text-[13px] text-brand-text-dim py-1"><span className="text-brand-text">Friday</span><span>11:00 AM - 11:00 PM</span></div>
-                  <div className="flex justify-between text-[13px] text-brand-text-dim py-1"><span className="text-brand-text">Saturday</span><span>12:00 PM - 11:00 PM</span></div>
-                  <div className="flex justify-between text-[13px] text-brand-text-dim py-1"><span className="text-brand-text">Sunday</span><span>12:00 PM - 10:00 PM</span></div>
+                <div className="flex flex-col gap-1 mt-2">
+                  <div className="flex justify-between text-[13px] text-brand-text-dim py-1"><span className="text-brand-text">Open Daily</span><span>11:00 AM - 9:30 PM</span></div>
                 </div>
               </div>
             </div>
@@ -47,7 +44,7 @@ export const Location = () => {
 
           <div className="relative rounded-xl overflow-hidden border border-brand-border aspect-[4/3] bg-surface-2">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d86016.92025114757!2d-122.40428054774676!3d47.613028448834316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5490102c93e83355%3A0x102565466944d59a!2sSeattle%2C%20WA!5e0!3m2!1sen!2sus!4v1716447814421!5m2!1sen!2sus" 
+              src="https://maps.google.com/maps?q=15190%20Walden%20Rd%2C%20Montgomery%2C%20TX%2077356&t=&z=15&ie=UTF8&iwloc=&output=embed" 
               width="100%" 
               height="100%" 
               style={{ border: 0, filter: 'grayscale(1) invert(0.9) contrast(0.8) hue-rotate(180deg)' }} 

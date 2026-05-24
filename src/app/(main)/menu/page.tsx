@@ -8,8 +8,11 @@ export const metadata = {
 export default function MenuPage() {
   return (
     <main className="min-h-screen bg-black">
-      <div className="pt-40 pb-12 text-center bg-surface border-b border-brand-border">
-        <div className="max-w-[1280px] mx-auto px-6">
+      <div className="relative pt-40 pb-20 text-center border-b border-brand-border overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80')] bg-cover bg-center" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/80 to-surface" />
+        
+        <div className="relative z-10 max-w-[1280px] mx-auto px-6">
           <div className="section-label justify-center mb-4">Our Menu</div>
           <h1 className="font-display text-[clamp(2.5rem,5vw,4rem)] font-bold text-cream leading-[1.1] mb-6">
             Explore The <em>Flavors</em>

@@ -2,15 +2,31 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
+import { fullMenuData } from '@/components/menu/MenuData';
 
-const menuItems = [
-  { id: 1, name: 'Butter Chicken', category: 'nonVegEntree', price: '$14.99', desc: 'Juicy chicken simmered in a creamy tomato-based gravy enriched with butter and mild spices.', img: 'https://images.pexels.com/photos/12737656/pexels-photo-12737656.jpeg?auto=compress&cs=tinysrgb&w=600&q=85', tags: ['Bestseller'] },
-  { id: 2, name: 'Chicken Biryani', category: 'dumBiryani', price: '$14.99', desc: 'Marinated chicken, fragrant basmati rice, and a blend of spices — slow-cooked to perfection.', img: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&q=85', tags: ["Chef's Pick"] },
-  { id: 3, name: 'Hakka Noodles', category: 'indoChinese', price: '$12.99', desc: 'Stir-fried noodles tossed with fresh vegetables, sauces, and your choice of protein in classic Indo-Chinese style.', img: 'https://images.pexels.com/photos/2347311/pexels-photo-2347311.jpeg?auto=compress&cs=tinysrgb&w=600&q=85', tags: ['Bestseller'] },
-  { id: 4, name: 'Dhal Makhani', category: 'vegEntree', price: '$12.99', desc: 'A rich and creamy lentil dish made with black lentils, butter, and cream, slow-cooked with spices.', img: 'https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600&q=85', tags: ['Vegan'] },
-  { id: 5, name: 'Goat Curry', category: 'goatCurry', price: '$16.99', desc: 'Tender goat meat blended with coastal spices, curry leaves, and aromatic herbs.', img: 'https://images.pexels.com/photos/10580198/pexels-photo-10580198.jpeg?auto=compress&cs=tinysrgb&w=600&q=85', tags: ['Spicy'] },
-  { id: 6, name: 'Garlic Naan', category: 'breads', price: '$3.00', desc: 'Tandoor-baked naan topped with fresh garlic and butter for a flavorful twist.', img: 'https://images.pexels.com/photos/10106456/pexels-photo-10106456.jpeg?auto=compress&cs=tinysrgb&w=600&q=85', tags: [] },
-];
+type MenuItem = { name: string; img: string; desc: string; price: string; spice?: number; tags?: string[]; category: string; id: string; };
+
+const getPreviewItems = () => {
+  const items: MenuItem[] = [];
+  
+  const addItem = (category: string, nameSearch: string) => {
+    const item = fullMenuData[category]?.find(i => i.name.toLowerCase().includes(nameSearch.toLowerCase()));
+    if (item) {
+      items.push({ ...item, category, id: item.name });
+    }
+  };
+
+  addItem('nonVegEntree', 'Butter Chicken');
+  addItem('dumBiryani', 'Chicken Biryani');
+  addItem('indoChinese', 'Hakka Noodles');
+  addItem('vegEntree', 'Dhal Makhani');
+  addItem('goatCurry', 'Goat Curry');
+  addItem('breads', 'Garlic Naan');
+
+  return items;
+};
+
+const menuItems = getPreviewItems();
 
 const categories = [
   { id: 'all', label: 'All' },
@@ -19,6 +35,14 @@ const categories = [
   { id: 'indoChinese', label: 'Indo-Chinese' },
   { id: 'vegEntree', label: 'Vegetarian' },
 ];
+
+const tagConfig: Record<string, { label: string, classes: string }> = {
+  bestseller: { label: 'BESTSELLER', classes: 'bg-[#ebb046] text-black' },
+  chef: { label: 'CHEF SPECIAL', classes: 'bg-[#ebb046] text-black' },
+  new: { label: 'NEW', classes: 'bg-[#222] text-white border border-white/10' },
+  vegan: { label: 'VEGAN', classes: 'bg-green-700 text-white' },
+  spicy: { label: 'SPICY', classes: 'bg-red-700 text-white' }
+};
 
 export const MenuPreview = () => {
   const [activeTab, setActiveTab] = useState('all');
@@ -62,38 +86,54 @@ export const MenuPreview = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 key={item.id} 
-                className="bg-surface rounded-xl overflow-hidden border border-white/5 transition-all duration-400 cursor-pointer hover:border-brand-border hover:-translate-y-1.5 hover:shadow-[0_24px_60px_rgba(0,0,0,0.5),0_0_40px_rgba(244,160,21,0.06)] group"
+                className="bg-[#141414] rounded-[1.25rem] overflow-hidden border border-[#222] flex flex-col group cursor-pointer transition-all duration-300 hover:-translate-y-1.5 hover:shadow-2xl hover:border-[#ebb046]/30"
               >
-                <div className="relative h-[210px] overflow-hidden bg-surface-2">
-                  <img src={item.img} alt={item.name} className="w-full h-full object-cover transition-transform duration-600 group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/65" />
-                  <div className="absolute top-3.5 left-3.5 flex gap-1.5 flex-wrap">
-                    {item.tags.map(tag => (
-                      <span key={tag} className={`px-2.5 py-1 rounded-full text-[10px] font-bold tracking-[0.08em] uppercase ${
-                        tag === 'Bestseller' ? 'bg-saffron text-black' :
-                        tag === 'Spicy' ? 'bg-crimson text-white' :
-                        tag === 'Vegan' ? 'bg-green-600 text-white' :
-                        'bg-gold text-black'
-                      }`}>
-                        {tag}
-                      </span>
-                    ))}
+                {/* Image Container */}
+                <div className="relative h-[240px] overflow-hidden">
+                  <img src={item.img} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                  
+                  {/* Tags */}
+                  <div className="absolute top-0 left-0 flex z-10 overflow-hidden rounded-br-[1rem]">
+                    {item.tags?.map((tag: string) => {
+                      const conf = tagConfig[tag];
+                      if(!conf) return null;
+                      return (
+                        <span key={tag} className={`px-3 py-1.5 text-[9px] font-bold tracking-[0.1em] uppercase ${conf.classes}`}>
+                          {conf.label}
+                        </span>
+                      );
+                    })}
                   </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-display text-[1.2rem] font-bold text-cream mb-1">{item.name}</h3>
-                  <div className="flex items-center gap-1 mb-2">
-                    <span className="text-saffron text-[13px] leading-none">★</span>
-                    <span className="text-cream text-[12px] font-bold leading-none mt-0.5">4.9</span>
-                    <span className="text-brand-text-dim text-[11px] leading-none mt-0.5">(120+)</span>
+
+                {/* Content Area */}
+                <div className="p-6 flex flex-col flex-1">
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="font-serif text-[1.4rem] text-white leading-tight">{item.name}</h3>
+                    <span className="font-sans text-[1.1rem] font-bold text-[#ebb046] shrink-0">{item.price}</span>
                   </div>
-                  <p className="text-[13px] text-brand-text-dim leading-[1.55] mb-4">{item.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-[1.4rem] font-bold text-saffron">{item.price}</span>
-                    <a href="https://www.doordash.com" target="_blank" rel="noopener" className="px-4 py-2 rounded-full bg-saffron/10 border border-solid border-saffron/25 flex items-center justify-center text-[11px] font-bold tracking-[0.1em] uppercase cursor-pointer transition-all duration-300 hover:bg-saffron hover:border-saffron hover:text-black text-saffron no-underline">
-                      Order Now
-                    </a>
+                  
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex gap-0.5 text-[#ebb046] text-[11px]">
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" /></svg>
+                    </div>
+                    <span className="text-[#888] text-[11px] font-medium mt-0.5">4.9 (120+)</span>
                   </div>
+                  
+                  <p className="text-[13px] text-[#888] leading-[1.6] mb-6 line-clamp-2 flex-1">{item.desc}</p>
+                  
+                  <a 
+                    href="https://www.doordash.com" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full flex items-center justify-center text-[11px] py-3.5 bg-[#222] group-hover:bg-[#ebb046] text-[#ebb046] group-hover:text-black transition-colors duration-300 uppercase tracking-[0.15em] font-bold rounded-[0.5rem]"
+                  >
+                    ORDER NOW
+                  </a>
                 </div>
               </motion.div>
             ))}
@@ -102,7 +142,6 @@ export const MenuPreview = () => {
 
         <div className="text-center mt-12 flex flex-wrap justify-center gap-4">
           <Button variant="ghost" href="/menu">View Full Menu →</Button>
-          <Button variant="outline" href="https://www.doordash.com">Order on DoorDash →</Button>
         </div>
       </div>
     </section>

@@ -36,9 +36,9 @@ export const Footer = () => {
           <div>
             <h4 className="text-[11px] font-bold tracking-[0.2em] uppercase text-cream mb-5">Contact</h4>
             <ul className="flex flex-col gap-2.5 list-none">
-              <li className="text-[13px] text-brand-text-dim">123 Spice Route Ave<br/>Seattle, WA 98101</li>
-              <li><a href="tel:+12065550199" className="text-[13px] text-brand-text-dim hover:text-saffron transition-colors">(206) 555-0199</a></li>
-              <li><a href="mailto:hello@curryexpress.com" className="text-[13px] text-brand-text-dim hover:text-saffron transition-colors">hello@curryexpress.com</a></li>
+              <li className="text-[13px] text-brand-text-dim">15190 Walden Rd<br/>Montgomery, TX 77356</li>
+              <li><a href="tel:+13468631124" className="text-[13px] text-brand-text-dim hover:text-saffron transition-colors">+1 (346) 863-1124</a></li>
+              <li className="text-[13px] text-brand-text-dim mt-2 text-saffron">Open Daily: 11:00 AM – 9:30 PM</li>
             </ul>
           </div>
 
@@ -61,8 +61,8 @@ export const Footer = () => {
         <div className="pt-6 border-t border-brand-border flex flex-wrap justify-between items-center gap-4">
           <p className="text-xs text-muted">© {new Date().getFullYear()} Curry Express. All rights reserved.</p>
           <div className="flex gap-5">
-            <Link href="#" className="text-xs text-muted hover:text-saffron transition-colors">Privacy Policy</Link>
-            <Link href="#" className="text-xs text-muted hover:text-saffron transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="text-xs text-muted hover:text-saffron transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-xs text-muted hover:text-saffron transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
