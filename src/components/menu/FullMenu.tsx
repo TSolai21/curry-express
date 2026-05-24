@@ -1,6 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { fullMenuData, categories, categoryLabels } from './MenuData';
 
 export const FullMenu = () => {
@@ -182,7 +183,13 @@ export const FullMenu = () => {
                         >
                           {/* Image Container */}
                           <div className="relative h-[220px] overflow-hidden">
-                            <img src={item.img} alt={item.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                            <Image 
+                              src={item.img} 
+                              alt={item.name} 
+                              fill 
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                            />
                             
                             {/* Tags */}
                             <div className="absolute top-0 left-0 flex z-10 overflow-hidden rounded-br-[1rem]">

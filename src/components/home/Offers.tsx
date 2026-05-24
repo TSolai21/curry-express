@@ -1,5 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const Offers = ({ offers = [] }: { offers?: any[] }) => {
   return (
@@ -24,7 +25,7 @@ export const Offers = ({ offers = [] }: { offers?: any[] }) => {
                   className="lg:col-span-2 lg:row-span-2 min-h-[480px] bg-[#141414] rounded-[1.5rem] overflow-hidden relative border border-white/5 flex flex-col justify-end p-10 group"
                 >
                   <div className="absolute inset-0">
-                    <img src={offer.image} alt={offer.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
+                    <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
                   </div>
                   
@@ -102,7 +103,7 @@ export const Offers = ({ offers = [] }: { offers?: any[] }) => {
                 {/* Right Image Area */}
                 <div className="w-[45%] shrink-0 relative h-full">
                   <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#141414] to-transparent z-10" />
-                  <img src={offer.image} alt={offer.title} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
+                  <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 1024px) 45vw, 33vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
                 </div>
               </motion.div>
             );

@@ -1,5 +1,6 @@
 "use client";
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export const About = () => {
   return (
@@ -25,10 +26,12 @@ export const About = () => {
 
             {/* Main Dark Container */}
             <div className="relative w-full aspect-[4/3.5] rounded-[2rem] overflow-hidden z-10 flex items-end justify-center shadow-2xl group cursor-pointer border border-white/5">
-              <img 
+              <Image 
                 src="/chef_illustration_colored.png" 
                 alt="Master Chef Illustration" 
-                className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" 
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" 
               />
             </div>
           </motion.div>

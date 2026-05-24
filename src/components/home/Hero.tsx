@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { Button } from '@/components/ui/Button';
 import { FaChevronDown } from 'react-icons/fa';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import Image from 'next/image';
 import { fullMenuData } from '@/components/menu/MenuData';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -47,7 +48,13 @@ export const Hero = () => {
       {allItems.map((item, idx) => (
         <SwiperSlide key={idx}>
           <div className="relative w-full h-full rounded-xl overflow-hidden shadow-2xl border border-white/10 bg-surface">
-            <img src={item.img} alt={item.name} className="w-full h-full object-cover" />
+            <Image 
+              src={item.img} 
+              alt={item.name} 
+              fill
+              sizes="(max-width: 640px) 280px, 340px"
+              className="object-cover" 
+            />
             <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/95 via-black/80 to-transparent font-serif text-2xl font-bold text-cream leading-tight">
               {item.name.replace(/ \(.*\)/, '')}
             </div>
@@ -59,7 +66,16 @@ export const Hero = () => {
 
   return (
     <section id="hero" className="min-h-screen relative flex items-center overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80')] bg-cover bg-center animate-ken-burns" />
+      <div className="absolute inset-0">
+        <Image 
+          src="https://images.pexels.com/photos/2802527/pexels-photo-2802527.jpeg?auto=compress&cs=tinysrgb&w=1920&q=80" 
+          alt="Curry Express Background" 
+          fill 
+          priority
+          sizes="100vw"
+          className="object-cover object-center animate-ken-burns" 
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/75 to-black/35" />
       <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
 
