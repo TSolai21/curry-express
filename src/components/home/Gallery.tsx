@@ -49,7 +49,7 @@ export const Gallery = () => {
                   width={600} 
                   height={400}
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="w-full h-auto block object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" 
+                  className="w-full h-auto block object-cover transition-all duration-700 ease-in-out" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85 opacity-0 transition-opacity duration-400 flex items-end p-4.5 group-hover:opacity-100">
                   <div className="font-serif text-[1.4rem] font-bold text-cream">{img.title}</div>

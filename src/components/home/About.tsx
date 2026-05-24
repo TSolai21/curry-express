@@ -31,7 +31,7 @@ export const About = () => {
                 alt="Master Chef Illustration" 
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" 
+                className="object-cover object-top transition-all duration-700 ease-in-out" 
               />
             </div>
           </motion.div>

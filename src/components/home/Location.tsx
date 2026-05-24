@@ -47,7 +47,7 @@ export const Location = () => {
               src="https://maps.google.com/maps?q=15190%20Walden%20Rd%2C%20Montgomery%2C%20TX%2077356&t=&z=15&ie=UTF8&iwloc=&output=embed" 
               width="100%" 
               height="100%" 
-              style={{ border: 0, filter: 'grayscale(1) invert(0.9) contrast(0.8) hue-rotate(180deg)' }} 
+              style={{ border: 0 }} 
               allowFullScreen={false} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
