@@ -42,7 +42,7 @@ export const Hero = () => {
       grabCursor={true}
       modules={[EffectCards, Autoplay]}
       autoplay={{ delay: 3500, disableOnInteraction: false }}
-      loop={true}
+      rewind={true}
       className="w-[280px] h-[380px] sm:w-[340px] sm:h-[460px]"
     >
       {allItems.map((item, idx) => (
@@ -52,8 +52,9 @@ export const Hero = () => {
               src={item.img} 
               alt={item.name} 
               fill
+              draggable={false}
               sizes="(max-width: 640px) 280px, 340px"
-              className="object-cover" 
+              className="object-cover pointer-events-none select-none" 
             />
             <div className="absolute bottom-0 inset-x-0 p-5 bg-gradient-to-t from-black/95 via-black/80 to-transparent font-serif text-2xl font-bold text-cream leading-tight">
               {item.name.replace(/ \(.*\)/, '')}
