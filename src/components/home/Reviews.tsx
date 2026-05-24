@@ -14,24 +14,7 @@ export const Reviews = ({ reviews = [] }: { reviews?: any[] }) => {
         </div>
       </div>
 
-      <div className="max-w-[1280px] mx-auto px-6 mb-16">
-        <div className="flex items-center justify-center gap-16 flex-wrap">
-          <div className="text-center">
-            <div className="font-display text-[5rem] font-black text-cream leading-none">4.<span className="text-saffron">9</span></div>
-            <div className="flex gap-1 justify-center mt-2 text-[15px] text-saffron">
-              <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-            </div>
-            <div className="text-[13px] text-muted mt-2">Based on 2,100+ DoorDash reviews</div>
-          </div>
-          <div className="w-[200px]">
-            <div className="flex items-center gap-2.5 mb-2"><span className="text-xs text-muted w-4 text-right">5</span><div className="w-[140px] h-1 bg-surface-2 rounded-full overflow-hidden"><div className="h-full bg-saffron rounded-full" style={{width: '85%'}}></div></div><span className="text-[11px] text-brand-text-dim w-7">85%</span></div>
-            <div className="flex items-center gap-2.5 mb-2"><span className="text-xs text-muted w-4 text-right">4</span><div className="w-[140px] h-1 bg-surface-2 rounded-full overflow-hidden"><div className="h-full bg-saffron rounded-full" style={{width: '10%'}}></div></div><span className="text-[11px] text-brand-text-dim w-7">10%</span></div>
-            <div className="flex items-center gap-2.5 mb-2"><span className="text-xs text-muted w-4 text-right">3</span><div className="w-[140px] h-1 bg-surface-2 rounded-full overflow-hidden"><div className="h-full bg-saffron rounded-full" style={{width: '3%'}}></div></div><span className="text-[11px] text-brand-text-dim w-7">3%</span></div>
-            <div className="flex items-center gap-2.5 mb-2"><span className="text-xs text-muted w-4 text-right">2</span><div className="w-[140px] h-1 bg-surface-2 rounded-full overflow-hidden"><div className="h-full bg-saffron rounded-full" style={{width: '1%'}}></div></div><span className="text-[11px] text-brand-text-dim w-7">1%</span></div>
-            <div className="flex items-center gap-2.5 mb-2"><span className="text-xs text-muted w-4 text-right">1</span><div className="w-[140px] h-1 bg-surface-2 rounded-full overflow-hidden"><div className="h-full bg-saffron rounded-full" style={{width: '1%'}}></div></div><span className="text-[11px] text-brand-text-dim w-7">1%</span></div>
-          </div>
-        </div>
-      </div>
+
 
       <div 
         className="overflow-hidden hover:[&>div]:[animation-play-state:paused]"
@@ -63,11 +46,7 @@ export const Reviews = ({ reviews = [] }: { reviews?: any[] }) => {
               )}
               {/* Body */}
               <div className="p-6 flex-1 flex flex-col justify-between">
-                <div className="flex gap-1 mb-3 text-[14px]">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i} className={i < (review.rating ?? 5) ? 'text-saffron' : 'text-surface-2'}>★</span>
-                  ))}
-                </div>
+
                 <p className="font-serif text-[1.02rem] italic text-cream/90 leading-[1.65]">
                   <span className="text-saffron text-[2.2rem] leading-none align-[-0.5em] mr-1">"</span>
                   {review.text}

@@ -126,8 +126,8 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-wrap gap-8 mt-8 pt-8 border-t border-saffron/20 justify-center lg:justify-start"
           >
-            <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={4.9} decimals={1} duration={4} /><span className="text-saffron">★</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Rating</div></div>
-            <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={2} duration={4.5} />k<span className="text-saffron">+</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Reviews</div></div>
+
+
             <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={allItems.length} duration={5} /><span className="text-saffron">+</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Dishes</div></div>
             <div><div className="font-display text-3xl font-bold text-cream leading-none"><Counter from={0} to={15} duration={4.5} /><span className="text-saffron">min</span></div><div className="text-[11px] font-medium tracking-[0.12em] uppercase text-muted mt-1">Avg. Delivery</div></div>
           </motion.div>
