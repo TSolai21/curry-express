@@ -9,43 +9,43 @@ import Select from 'react-select';
 const selectStyles = {
   control: (base: any, state: any) => ({
     ...base,
-    backgroundColor: '#141414',
-    borderColor: state.isFocused ? '#ebb046' : '#222222',
-    boxShadow: state.isFocused ? '0 0 0 1px #ebb046' : 'none',
+    backgroundColor: '#1e1d1a',
+    borderColor: state.isFocused ? '#f4a015' : 'rgba(244, 160, 21, 0.15)',
+    boxShadow: state.isFocused ? '0 0 0 1px #f4a015' : 'none',
     '&:hover': {
-      borderColor: '#ebb046',
+      borderColor: '#f4a015',
     },
     borderRadius: '0.375rem',
     minHeight: '38px',
-    color: '#f5f5dc',
+    color: '#f5edd6',
   }),
   menu: (base: any) => ({
     ...base,
-    backgroundColor: '#141414',
-    border: '1px solid #222222',
+    backgroundColor: '#1e1d1a',
+    border: '1px solid rgba(244, 160, 21, 0.15)',
     borderRadius: '0.375rem',
     zIndex: 9999,
   }),
   option: (base: any, state: any) => ({
     ...base,
     backgroundColor: state.isSelected 
-      ? '#ebb046' 
+      ? '#f4a015' 
       : state.isFocused 
-        ? 'rgba(235, 176, 70, 0.15)' 
+        ? 'rgba(244, 160, 21, 0.15)' 
         : 'transparent',
-    color: state.isSelected ? '#000000' : '#f5f5dc',
+    color: state.isSelected ? '#0a0908' : '#f5edd6',
     cursor: 'pointer',
     '&:active': {
-      backgroundColor: '#ebb046',
+      backgroundColor: '#f4a015',
     },
   }),
   singleValue: (base: any) => ({
     ...base,
-    color: '#f5f5dc',
+    color: '#f5edd6',
   }),
   input: (base: any) => ({
     ...base,
-    color: '#f5f5dc',
+    color: '#f5edd6',
   }),
 };
 
@@ -128,12 +128,13 @@ export const OfferForm = () => {
 
   return (
     <>
-      {/* Trigger */}
+      {/* Trigger: Floating Action Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-saffron text-black px-4 py-2 rounded font-bold text-sm hover:bg-saffron-light transition-colors"
+        className="fixed bottom-6 right-6 z-[2000] bg-saffron text-black w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl hover:bg-saffron-light shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group"
+        title="Add Offer"
       >
-        + Add Offer
+        <span className="group-hover:rotate-90 transition-transform duration-300">+</span>
       </button>
 
       {/* Modal */}
@@ -148,29 +149,29 @@ export const OfferForm = () => {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Offer Title <span className="text-red-400">*</span></label>
-                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.title ? 'border-red-500' : 'border-brand-border'}`} placeholder="e.g. Family Feast Combo" />
+                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.title ? 'border-red-500' : 'border-brand-border'}`} placeholder="e.g. Family Feast Combo" />
                     {errors.title && <p className="mt-1 text-xs text-red-400">{errors.title}</p>}
                   </div>
-                  <div className="mb-4 flex items-center gap-3 bg-surface-2 p-4 rounded-lg border border-brand-border">
+                  <div className="mb-4 flex items-center gap-3 py-1">
                     <input type="checkbox" id="active" name="active" defaultChecked className="w-5 h-5 accent-saffron cursor-pointer" />
                     <label htmlFor="active" className="text-sm font-bold text-cream cursor-pointer">Offer is Active (visible on website)</label>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-bold text-cream mb-1">Discount Price <span className="text-red-400">*</span></label>
-                      <input name="price" value={price} onChange={e => setPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.price ? 'border-red-500' : 'border-brand-border'}`} placeholder="$36.99" />
+                      <input name="price" value={price} onChange={e => setPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.price ? 'border-red-500' : 'border-brand-border'}`} placeholder="$36.99" />
                       {errors.price && <p className="mt-1 text-xs text-red-400">{errors.price}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-cream mb-1">Original Price <span className="text-red-400">*</span></label>
-                      <input name="originalPrice" value={originalPrice} onChange={e => setOriginalPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.originalPrice ? 'border-red-500' : 'border-brand-border'}`} placeholder="$54.00" />
+                      <input name="originalPrice" value={originalPrice} onChange={e => setOriginalPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.originalPrice ? 'border-red-500' : 'border-brand-border'}`} placeholder="$54.00" />
                       {errors.originalPrice && <p className="mt-1 text-xs text-red-400">{errors.originalPrice}</p>}
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-bold text-cream mb-1">Badge Text <span className="text-red-400">*</span></label>
-                      <input name="badge" value={badge} onChange={e => setBadge(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.badge ? 'border-red-500' : 'border-brand-border'}`} placeholder="e.g. Most Popular" />
+                      <input name="badge" value={badge} onChange={e => setBadge(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.badge ? 'border-red-500' : 'border-brand-border'}`} placeholder="e.g. Most Popular" />
                       {errors.badge && <p className="mt-1 text-xs text-red-400">{errors.badge}</p>}
                     </div>
                      <div>
@@ -198,7 +199,7 @@ export const OfferForm = () => {
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Description / Items <span className="text-red-400">*</span></label>
-                    <textarea name="description" value={description} onChange={e => setDescription(e.target.value)} rows={3} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.description ? 'border-red-500' : 'border-brand-border'}`} placeholder="2 Curries · 1 Biryani..." />
+                    <textarea name="description" value={description} onChange={e => setDescription(e.target.value)} rows={3} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.description ? 'border-red-500' : 'border-brand-border'}`} placeholder="2 Curries · 1 Biryani..." />
                     {errors.description && <p className="mt-1 text-xs text-red-400">{errors.description}</p>}
                   </div>
                 </div>

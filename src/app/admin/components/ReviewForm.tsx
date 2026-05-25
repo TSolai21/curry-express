@@ -62,11 +62,13 @@ export const ReviewForm = () => {
 
   return (
     <>
+      {/* Trigger: Floating Action Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-saffron text-black px-4 py-2 rounded font-bold text-sm hover:bg-saffron-light transition-colors"
+        className="fixed bottom-6 right-6 z-[2000] bg-saffron text-black w-14 h-14 rounded-full flex items-center justify-center font-bold text-2xl hover:bg-saffron-light shadow-2xl transition-all duration-300 hover:scale-105 active:scale-95 group"
+        title="Add Review"
       >
-        + Add Review
+        <span className="group-hover:rotate-90 transition-transform duration-300">+</span>
       </button>
 
       {isOpen && (
@@ -80,17 +82,17 @@ export const ReviewForm = () => {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Customer Name <span className="text-red-400">*</span></label>
-                    <input name="author" value={author} onChange={e => setAuthor(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.author ? 'border-red-500' : 'border-brand-border'}`} placeholder="e.g. John D." />
+                    <input name="author" value={author} onChange={e => setAuthor(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.author ? 'border-red-500' : 'border-brand-border'}`} placeholder="e.g. John D." />
                     {errors.author && <p className="mt-1 text-xs text-red-400">{errors.author}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Source <span className="text-red-400">*</span></label>
-                    <input name="source" value={source} onChange={e => setSource(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.source ? 'border-red-500' : 'border-brand-border'}`} />
+                    <input name="source" value={source} onChange={e => setSource(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.source ? 'border-red-500' : 'border-brand-border'}`} />
                     {errors.source && <p className="mt-1 text-xs text-red-400">{errors.source}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Review Text <span className="text-red-400">*</span></label>
-                    <textarea name="text" rows={5} value={text} onChange={e => setText(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.text ? 'border-red-500' : 'border-brand-border'}`} placeholder="Write the review here..." />
+                    <textarea name="text" rows={5} value={text} onChange={e => setText(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.text ? 'border-red-500' : 'border-brand-border'}`} placeholder="Write the review here..." />
                     {errors.text && <p className="mt-1 text-xs text-red-400">{errors.text}</p>}
                   </div>
                 </div>

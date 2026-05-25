@@ -137,19 +137,23 @@ export default async function AdminPage() {
             <div className="block md:hidden space-y-4">
               {offers.map((o: any) => (
                 <div key={o.id} className="bg-surface border border-brand-border rounded-xl p-4 space-y-4 shadow-md">
-                  <div className="flex items-center gap-3">
-                    <img src={o.image} alt={o.title} className="w-12 h-12 object-cover rounded-lg border border-brand-border shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <div className="font-bold text-cream text-sm truncate">{o.title}</div>
-                      <div className="flex items-center gap-2 mt-1">
-                        <span className="text-saffron font-bold text-xs">{o.price}</span>
-                        <span className="text-brand-text-dim line-through text-[10px]">{o.originalPrice}</span>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                      <img src={o.image} alt={o.title} className="w-12 h-12 object-cover rounded-lg border border-brand-border shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <div className="font-bold text-cream text-sm truncate">{o.title}</div>
+                        <div className="flex items-center gap-2 mt-1">
+                          <span className="text-saffron font-bold text-xs">{o.price}</span>
+                          <span className="text-brand-text-dim line-through text-[10px]">{o.originalPrice}</span>
+                        </div>
                       </div>
+                    </div>
+                    <div className="shrink-0 pt-0.5">
+                      <OfferStatusToggle offer={o} />
                     </div>
                   </div>
                   <div className="flex items-center justify-between pt-3 border-t border-brand-border/40">
-                    <div className="flex items-center gap-3">
-                      <OfferStatusToggle offer={o} />
+                    <div>
                       {o.badge && <span className="bg-saffron text-black text-[10px] font-bold px-2 py-0.5 rounded">{o.badge}</span>}
                     </div>
                     <OfferActions offer={o} />

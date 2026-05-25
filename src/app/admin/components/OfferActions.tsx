@@ -8,43 +8,43 @@ import Select from 'react-select';
 const selectStyles = {
   control: (base: any, state: any) => ({
     ...base,
-    backgroundColor: '#141414',
-    borderColor: state.isFocused ? '#ebb046' : '#222222',
-    boxShadow: state.isFocused ? '0 0 0 1px #ebb046' : 'none',
+    backgroundColor: '#1e1d1a',
+    borderColor: state.isFocused ? '#f4a015' : 'rgba(244, 160, 21, 0.15)',
+    boxShadow: state.isFocused ? '0 0 0 1px #f4a015' : 'none',
     '&:hover': {
-      borderColor: '#ebb046',
+      borderColor: '#f4a015',
     },
     borderRadius: '0.375rem',
     minHeight: '38px',
-    color: '#f5f5dc',
+    color: '#f5edd6',
   }),
   menu: (base: any) => ({
     ...base,
-    backgroundColor: '#141414',
-    border: '1px solid #222222',
+    backgroundColor: '#1e1d1a',
+    border: '1px solid rgba(244, 160, 21, 0.15)',
     borderRadius: '0.375rem',
     zIndex: 9999,
   }),
   option: (base: any, state: any) => ({
     ...base,
     backgroundColor: state.isSelected 
-      ? '#ebb046' 
+      ? '#f4a015' 
       : state.isFocused 
-        ? 'rgba(235, 176, 70, 0.15)' 
+        ? 'rgba(244, 160, 21, 0.15)' 
         : 'transparent',
-    color: state.isSelected ? '#000000' : '#f5f5dc',
+    color: state.isSelected ? '#0a0908' : '#f5edd6',
     cursor: 'pointer',
     '&:active': {
-      backgroundColor: '#ebb046',
+      backgroundColor: '#f4a015',
     },
   }),
   singleValue: (base: any) => ({
     ...base,
-    color: '#f5f5dc',
+    color: '#f5edd6',
   }),
   input: (base: any) => ({
     ...base,
-    color: '#f5f5dc',
+    color: '#f5edd6',
   }),
 };
 
@@ -172,29 +172,29 @@ export const OfferActions = ({ offer }: { offer: any }) => {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Offer Title <span className="text-red-400">*</span></label>
-                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.title ? 'border-red-500' : 'border-brand-border'}`} />
+                    <input name="title" value={title} onChange={e => setTitle(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.title ? 'border-red-500' : 'border-brand-border'}`} />
                     {errors.title && <p className="mt-1 text-xs text-red-400">{errors.title}</p>}
                   </div>
-                  <div className="mb-4 flex items-center gap-3 bg-surface-2 p-4 rounded-lg border border-brand-border">
+                  <div className="mb-4 flex items-center gap-3 py-1">
                     <input type="checkbox" id="active" name="active" defaultChecked={offer.active !== false} className="w-5 h-5 accent-saffron cursor-pointer" />
                     <label htmlFor="active" className="text-sm font-bold text-cream cursor-pointer">Offer is Active (visible on website)</label>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-bold text-cream mb-1">Discount Price <span className="text-red-400">*</span></label>
-                      <input name="price" value={price} onChange={e => setPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.price ? 'border-red-500' : 'border-brand-border'}`} />
+                      <input name="price" value={price} onChange={e => setPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.price ? 'border-red-500' : 'border-brand-border'}`} />
                       {errors.price && <p className="mt-1 text-xs text-red-400">{errors.price}</p>}
                     </div>
                     <div>
                       <label className="block text-sm font-bold text-cream mb-1">Original Price <span className="text-red-400">*</span></label>
-                      <input name="originalPrice" value={originalPrice} onChange={e => setOriginalPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.originalPrice ? 'border-red-500' : 'border-brand-border'}`} />
+                      <input name="originalPrice" value={originalPrice} onChange={e => setOriginalPrice(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.originalPrice ? 'border-red-500' : 'border-brand-border'}`} />
                       {errors.originalPrice && <p className="mt-1 text-xs text-red-400">{errors.originalPrice}</p>}
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                       <label className="block text-sm font-bold text-cream mb-1">Badge Text <span className="text-red-400">*</span></label>
-                      <input name="badge" value={badge} onChange={e => setBadge(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.badge ? 'border-red-500' : 'border-brand-border'}`} />
+                      <input name="badge" value={badge} onChange={e => setBadge(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.badge ? 'border-red-500' : 'border-brand-border'}`} />
                       {errors.badge && <p className="mt-1 text-xs text-red-400">{errors.badge}</p>}
                     </div>
                      <div>
@@ -222,7 +222,7 @@ export const OfferActions = ({ offer }: { offer: any }) => {
                   </div>
                   <div>
                     <label className="block text-sm font-bold text-cream mb-1">Description / Items <span className="text-red-400">*</span></label>
-                    <textarea name="description" rows={3} value={description} onChange={e => setDescription(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream ${errors.description ? 'border-red-500' : 'border-brand-border'}`} />
+                    <textarea name="description" rows={3} value={description} onChange={e => setDescription(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.description ? 'border-red-500' : 'border-brand-border'}`} />
                     {errors.description && <p className="mt-1 text-xs text-red-400">{errors.description}</p>}
                   </div>
                 </div>
