@@ -49,7 +49,9 @@ export async function addReview(formData: FormData) {
     text: formData.get('text') as string,
     author: formData.get('author') as string,
     source: formData.get('source') as string || 'Website',
-    image: imagePath
+    image: imagePath,
+    image_pos_x: parseFloat(formData.get('imagePosX') as string || '50'),
+    image_pos_y: parseFloat(formData.get('imagePosY') as string || '50'),
   };
 
   const { error } = await supabase.from('reviews').insert([newReview]);
@@ -95,7 +97,9 @@ export async function addOffer(formData: FormData) {
     active: formData.has('active'),
     image: imagePath,
     col_span: parseInt(formData.get('colSpan') as string || '1'),
-    row_span: parseInt(formData.get('rowSpan') as string || '1')
+    row_span: parseInt(formData.get('rowSpan') as string || '1'),
+    image_pos_x: parseFloat(formData.get('imagePosX') as string || '50'),
+    image_pos_y: parseFloat(formData.get('imagePosY') as string || '50'),
   };
 
   const { error } = await supabase.from('offers').insert([newOffer]);
@@ -126,7 +130,9 @@ export async function updateReview(id: string, formData: FormData) {
   const updates: any = {
     text: formData.get('text') as string,
     author: formData.get('author') as string,
-    source: formData.get('source') as string
+    source: formData.get('source') as string,
+    image_pos_x: parseFloat(formData.get('imagePosX') as string || '50'),
+    image_pos_y: parseFloat(formData.get('imagePosY') as string || '50'),
   };
 
   const removeImage = formData.get('removeImage') === 'true';
@@ -165,6 +171,10 @@ export async function updateOffer(id: string, formData: FormData) {
     price: formData.get('price') as string,
     original_price: formData.get('originalPrice') as string,
     active: formData.has('active'),
+    image_pos_x: parseFloat(formData.get('imagePosX') as string || '50'),
+    image_pos_y: parseFloat(formData.get('imagePosY') as string || '50'),
+    col_span: parseInt(formData.get('colSpan') as string || '1'),
+    row_span: parseInt(formData.get('rowSpan') as string || '1'),
   };
 
   const removeImage = formData.get('removeImage') === 'true';

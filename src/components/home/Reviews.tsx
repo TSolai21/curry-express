@@ -26,7 +26,7 @@ export const Reviews = ({ reviews = [] }: { reviews?: any[] }) => {
               {/* Top image banner */}
               {review.image ? (
                 <div className="relative h-[160px] w-full overflow-hidden">
-                  <Image src={review.image} alt={review.author} fill sizes="340px" className="object-cover" />
+                  <Image src={review.image} alt={review.author} fill sizes="340px" className="object-cover" style={{ objectPosition: `${review.image_pos_x ?? 50}% ${review.image_pos_y ?? 50}%` }} />
                   <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/70" />
                   <div className="absolute bottom-3 left-4 flex items-center gap-2">
                     <div className="text-sm font-bold text-white">{review.author}</div>

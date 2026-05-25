@@ -5,7 +5,9 @@ CREATE TABLE public.reviews (
   text text NOT NULL,
   author text NOT NULL,
   source text DEFAULT 'Website',
-  image text
+  image text,
+  image_pos_x float DEFAULT 50,
+  image_pos_y float DEFAULT 50
 );
 
 -- Create Offers Table
@@ -22,7 +24,9 @@ CREATE TABLE public.offers (
   image text,
   col_span integer DEFAULT 1,
   row_span integer DEFAULT 1,
-  active boolean DEFAULT true
+  active boolean DEFAULT true,
+  image_pos_x float DEFAULT 50,
+  image_pos_y float DEFAULT 50
 );
 
 -- Set Row Level Security

@@ -25,14 +25,20 @@ export const Offers = ({ offers = [] }: { offers?: any[] }) => {
                   className="lg:col-span-2 lg:row-span-2 min-h-[480px] bg-[#141414] rounded-[1.5rem] overflow-hidden relative border border-white/5 flex flex-col justify-end p-10 group"
                 >
                   <div className="absolute inset-0">
-                    <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
+                    <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 1024px) 100vw, 66vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" style={{ objectPosition: `${offer.image_pos_x ?? 50}% ${offer.image_pos_y ?? 50}%` }} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
                   </div>
                   
                   <div className="relative z-10 w-full lg:w-[85%]">
                     <div className="flex items-center gap-0 mb-5">
                       {offer.badge && (
-                        <span className="bg-[#ebb046] text-black px-3.5 py-1.5 text-[9px] font-bold tracking-[0.15em] uppercase">
+                        <span className={`px-3.5 py-1.5 text-[9px] font-bold tracking-[0.15em] uppercase ${
+                          offer.badgeColor === 'crimson' 
+                            ? 'bg-red-600 text-white' 
+                            : offer.badgeColor === 'transparent' 
+                              ? 'bg-transparent text-[#ebb046] border border-[#ebb046]' 
+                              : 'bg-[#ebb046] text-black'
+                        }`}>
                           {offer.badge}
                         </span>
                       )}
@@ -76,7 +82,13 @@ export const Offers = ({ offers = [] }: { offers?: any[] }) => {
                 {/* Left Content Area */}
                 <div className="flex-1 p-7 pr-2 flex flex-col justify-center relative z-10 w-[55%]">
                   {offer.badge && (
-                    <span className="text-[#ebb046] text-[9px] font-bold tracking-[0.2em] uppercase mb-4">
+                    <span className={`text-[9px] font-bold tracking-[0.2em] uppercase mb-4 ${
+                      offer.badgeColor === 'crimson' 
+                        ? 'text-red-500' 
+                        : offer.badgeColor === 'transparent' 
+                          ? 'text-white/60 border border-white/20 px-2 py-0.5 rounded w-max' 
+                          : 'text-[#ebb046]'
+                    }`}>
                       {offer.badge.replace(/[^a-zA-Z\s]/g, '').trim()}
                     </span>
                   )}
@@ -103,7 +115,7 @@ export const Offers = ({ offers = [] }: { offers?: any[] }) => {
                 {/* Right Image Area */}
                 <div className="w-[45%] shrink-0 relative h-full">
                   <div className="absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-[#141414] to-transparent z-10" />
-                  <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 1024px) 45vw, 33vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" />
+                  <Image src={offer.image} alt={offer.title} fill sizes="(max-width: 1024px) 45vw, 33vw" className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out" style={{ objectPosition: `${offer.image_pos_x ?? 50}% ${offer.image_pos_y ?? 50}%` }} />
                 </div>
               </motion.div>
             );
