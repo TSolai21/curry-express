@@ -23,7 +23,9 @@ export default async function AdminPage() {
         reviewsTab={
           <section>
             <p className="text-sm text-brand-text-dim mb-4">{reviews.length} review{reviews.length !== 1 ? 's' : ''} total</p>
-            <div className="overflow-x-auto rounded-xl border border-brand-border">
+            
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto rounded-xl border border-brand-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-surface border-b border-brand-border">
@@ -53,17 +55,47 @@ export default async function AdminPage() {
                     </tr>
                   ))}
                   {reviews.length === 0 && (
-                    <tr><td colSpan={6} className="px-4 py-8 text-center text-brand-text-dim">No reviews yet.</td></tr>
+                    <tr><td colSpan={5} className="px-4 py-8 text-center text-brand-text-dim">No reviews yet.</td></tr>
                   )}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile Card List */}
+            <div className="block md:hidden space-y-4">
+              {reviews.map((r: any) => (
+                <div key={r.id} className="bg-surface border border-brand-border rounded-xl p-4 space-y-4 shadow-md">
+                  <div className="flex items-center gap-3">
+                    {r.image ? (
+                      <img src={r.image} alt={r.author} className="w-10 h-10 rounded-full object-cover border border-brand-border" />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-saffron/20 border border-saffron/30 flex items-center justify-center font-bold text-saffron text-sm shrink-0">
+                        {r.author?.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <div className="font-bold text-cream text-sm">{r.author}</div>
+                      <div className="text-xs text-saffron">via {r.source}</div>
+                    </div>
+                  </div>
+                  <p className="text-sm text-cream/80 italic line-clamp-3">"{r.text}"</p>
+                  <div className="flex justify-end pt-3 border-t border-brand-border/40">
+                    <ReviewActions review={r} />
+                  </div>
+                </div>
+              ))}
+              {reviews.length === 0 && (
+                <p className="text-center text-brand-text-dim text-sm py-8">No reviews yet.</p>
+              )}
             </div>
           </section>
         }
         offersTab={
           <section>
             <p className="text-sm text-brand-text-dim mb-4">{offers.length} offer{offers.length !== 1 ? 's' : ''} total</p>
-            <div className="overflow-x-auto rounded-xl border border-brand-border">
+            
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto rounded-xl border border-brand-border">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-surface border-b border-brand-border">
@@ -95,10 +127,38 @@ export default async function AdminPage() {
                     </tr>
                   ))}
                   {offers.length === 0 && (
-                    <tr><td colSpan={6} className="px-4 py-8 text-center text-brand-text-dim">No offers yet.</td></tr>
+                    <tr><td colSpan={7} className="px-4 py-8 text-center text-brand-text-dim">No offers yet.</td></tr>
                   )}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile Card List */}
+            <div className="block md:hidden space-y-4">
+              {offers.map((o: any) => (
+                <div key={o.id} className="bg-surface border border-brand-border rounded-xl p-4 space-y-4 shadow-md">
+                  <div className="flex items-center gap-3">
+                    <img src={o.image} alt={o.title} className="w-12 h-12 object-cover rounded-lg border border-brand-border shrink-0" />
+                    <div className="flex-1 min-w-0">
+                      <div className="font-bold text-cream text-sm truncate">{o.title}</div>
+                      <div className="flex items-center gap-2 mt-1">
+                        <span className="text-saffron font-bold text-xs">{o.price}</span>
+                        <span className="text-brand-text-dim line-through text-[10px]">{o.originalPrice}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between pt-3 border-t border-brand-border/40">
+                    <div className="flex items-center gap-3">
+                      <OfferStatusToggle offer={o} />
+                      {o.badge && <span className="bg-saffron text-black text-[10px] font-bold px-2 py-0.5 rounded">{o.badge}</span>}
+                    </div>
+                    <OfferActions offer={o} />
+                  </div>
+                </div>
+              ))}
+              {offers.length === 0 && (
+                <p className="text-center text-brand-text-dim text-sm py-8">No offers yet.</p>
+              )}
             </div>
           </section>
         }
