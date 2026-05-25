@@ -28,7 +28,6 @@ export default async function AdminPage() {
                   <tr className="bg-surface border-b border-brand-border">
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Image</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Author</th>
-                    <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Rating</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Source</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Review</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Actions</th>
@@ -47,10 +46,6 @@ export default async function AdminPage() {
                         )}
                       </td>
                       <td className="px-4 py-3 font-bold text-cream whitespace-nowrap">{r.author}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <span className="text-saffron">{Array.from({length: r.rating ?? 5}).map((_, i) => '★').join('')}</span>
-                        <span className="text-surface-2">{Array.from({length: 5 - (r.rating ?? 5)}).map((_, i) => '★').join('')}</span>
-                      </td>
                       <td className="px-4 py-3 text-saffron whitespace-nowrap">{r.source}</td>
                       <td className="px-4 py-3 text-cream/80 italic max-w-xs truncate">"{r.text}"</td>
                       <td className="px-4 py-3"><ReviewActions review={r} /></td>

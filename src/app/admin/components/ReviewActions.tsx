@@ -4,8 +4,6 @@ import { deleteReview, updateReview } from '@/app/actions';
 
 export const ReviewActions = ({ review }: { review: any }) => {
   const [editOpen, setEditOpen] = useState(false);
-  const [rating, setRating] = useState(review.rating ?? 5);
-  const [hovered, setHovered] = useState(0);
   const [preview, setPreview] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [confirming, setConfirming] = useState(false);
@@ -21,7 +19,6 @@ export const ReviewActions = ({ review }: { review: any }) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
-    formData.set('rating', rating.toString());
     await updateReview(review.id, formData);
     setLoading(false);
     setEditOpen(false);
@@ -69,19 +66,7 @@ export const ReviewActions = ({ review }: { review: any }) => {
                 <label className="block text-sm font-bold text-cream mb-1">Source</label>
                 <input name="source" required defaultValue={review.source} className="w-full bg-surface-2 border border-brand-border rounded p-2 text-sm text-cream" />
               </div>
-              <div>
-                <label className="block text-sm font-bold text-cream mb-2">Rating</label>
-                <div className="flex gap-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button key={star} type="button" onClick={() => setRating(star)}
-                      onMouseEnter={() => setHovered(star)} onMouseLeave={() => setHovered(0)}
-                      className="text-3xl leading-none transition-transform hover:scale-110">
-                      <span className={(hovered || rating) >= star ? 'text-saffron' : 'text-surface-2'}>★</span>
-                    </button>
-                  ))}
-                  <span className="ml-2 text-sm text-brand-text-dim self-center">{rating} / 5</span>
-                </div>
-              </div>
+
               <div>
                 <label className="block text-sm font-bold text-cream mb-1">Replace Image (Optional)</label>
                 <div className="flex items-center gap-4">

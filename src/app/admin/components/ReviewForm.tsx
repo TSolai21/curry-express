@@ -8,8 +8,6 @@ export const ReviewForm = () => {
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [rating, setRating] = useState(5);
-  const [hovered, setHovered] = useState(0);
 
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -24,11 +22,9 @@ export const ReviewForm = () => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
-    formData.set('rating', rating.toString());
     await addReview(formData);
     ref.current?.reset();
     setPreview(null);
-    setRating(5);
     setLoading(false);
     setIsOpen(false);
   }
@@ -56,24 +52,7 @@ export const ReviewForm = () => {
                 <label className="block text-sm font-bold text-cream mb-1">Source (e.g. DoorDash, Yelp)</label>
                 <input name="source" defaultValue="DoorDash" required className="w-full bg-surface-2 border border-brand-border rounded p-2 text-sm text-cream" />
               </div>
-              <div>
-                <label className="block text-sm font-bold text-cream mb-2">Rating</label>
-                <div className="flex gap-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setRating(star)}
-                      onMouseEnter={() => setHovered(star)}
-                      onMouseLeave={() => setHovered(0)}
-                      className="text-3xl leading-none transition-transform hover:scale-110 focus:outline-none"
-                    >
-                      <span className={(hovered || rating) >= star ? 'text-saffron' : 'text-surface-2'}>★</span>
-                    </button>
-                  ))}
-                  <span className="ml-2 text-sm text-brand-text-dim self-center">{rating} / 5</span>
-                </div>
-              </div>
+
               <div>
                 <label className="block text-sm font-bold text-cream mb-1">Customer Image (Optional)</label>
                 <div className="flex items-center gap-4">

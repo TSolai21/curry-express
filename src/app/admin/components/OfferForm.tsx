@@ -75,11 +75,7 @@ export const OfferForm = () => {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-cream mb-1">Image URL (Fallback)</label>
-                <input name="image" className="w-full bg-surface-2 border border-brand-border rounded p-2 text-sm text-cream" placeholder="https://..." />
-              </div>
-              <div>
-                <label className="block text-sm font-bold text-cream mb-1">Upload Image (Overrides URL)</label>
+                <label className="block text-sm font-bold text-cream mb-1">Upload Image</label>
                 {preview && (
                   <div className="mb-3">
                     <img src={preview} alt="Preview" className="h-32 rounded-lg object-cover border border-brand-border" />
