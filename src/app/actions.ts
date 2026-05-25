@@ -92,6 +92,7 @@ export async function addOffer(formData: FormData) {
     description: formData.get('description') as string,
     price: formData.get('price') as string,
     original_price: formData.get('originalPrice') as string,
+    active: formData.has('active'),
     image: imagePath,
     col_span: parseInt(formData.get('colSpan') as string || '1'),
     row_span: parseInt(formData.get('rowSpan') as string || '1')
@@ -128,8 +129,12 @@ export async function updateReview(id: string, formData: FormData) {
     source: formData.get('source') as string
   };
 
+  const removeImage = formData.get('removeImage') === 'true';
+
   if (newImagePath) {
     updates.image = newImagePath;
+  } else if (removeImage) {
+    updates.image = null;
   }
 
   await supabase.from('reviews').update(updates).eq('id', id);
@@ -159,17 +164,26 @@ export async function updateOffer(id: string, formData: FormData) {
     description: formData.get('description') as string,
     price: formData.get('price') as string,
     original_price: formData.get('originalPrice') as string,
+    active: formData.has('active'),
   };
 
-  const imageString = formData.get('image') as string;
+  const removeImage = formData.get('removeImage') === 'true';
+
   if (newImagePath) {
     updates.image = newImagePath;
-  } else if (imageString) {
-    updates.image = imageString;
+  } else if (removeImage) {
+    updates.image = null;
   }
 
   await supabase.from('offers').update(updates).eq('id', id);
 
+  revalidatePath('/');
+  revalidatePath('/admin');
+}
+
+export async function toggleOfferStatus(id: string, active: boolean) {
+  const supabase = await createClient();
+  await supabase.from('offers').update({ active }).eq('id', id);
   revalidatePath('/');
   revalidatePath('/admin');
 }

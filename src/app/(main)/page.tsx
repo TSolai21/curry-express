@@ -11,12 +11,13 @@ import { getReviews, getOffers } from '@/app/actions';
 export default async function Home() {
   const reviews = await getReviews();
   const offers = await getOffers();
+  const activeOffers = offers.filter((o: any) => o.active !== false);
   return (
     <>
       <Hero />
       <Marquee />
       <MenuPreview />
-      <Offers offers={offers} />
+      <Offers offers={activeOffers} />
       <About />
       <Gallery />
       <Reviews reviews={reviews} />

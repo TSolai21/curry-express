@@ -21,7 +21,8 @@ CREATE TABLE public.offers (
   original_price text,
   image text,
   col_span integer DEFAULT 1,
-  row_span integer DEFAULT 1
+  row_span integer DEFAULT 1,
+  active boolean DEFAULT true
 );
 
 -- Set Row Level Security

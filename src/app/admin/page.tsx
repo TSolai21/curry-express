@@ -4,6 +4,7 @@ import { OfferForm } from './components/OfferForm';
 import { AdminTabs } from './components/AdminTabs';
 import { ReviewActions } from './components/ReviewActions';
 import { OfferActions } from './components/OfferActions';
+import { OfferStatusToggle } from './components/OfferStatusToggle';
 
 export default async function AdminPage() {
   const reviews = await getReviews();
@@ -70,6 +71,7 @@ export default async function AdminPage() {
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Title</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Price</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Original</th>
+                    <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Status</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Badge</th>
                     <th className="text-left px-4 py-3 text-xs font-bold uppercase tracking-wider text-brand-text-dim">Actions</th>
                   </tr>
@@ -83,6 +85,9 @@ export default async function AdminPage() {
                       <td className="px-4 py-3 font-bold text-cream whitespace-nowrap">{o.title}</td>
                       <td className="px-4 py-3 text-saffron font-bold whitespace-nowrap">{o.price}</td>
                       <td className="px-4 py-3 text-brand-text-dim line-through whitespace-nowrap">{o.originalPrice}</td>
+                      <td className="px-4 py-3">
+                        <OfferStatusToggle offer={o} />
+                      </td>
                       <td className="px-4 py-3">
                         {o.badge && <span className="bg-saffron text-black text-xs font-bold px-2 py-0.5 rounded">{o.badge}</span>}
                       </td>

@@ -1,16 +1,19 @@
 "use client";
 import { useState } from 'react';
 import { deleteOffer, updateOffer } from '@/app/actions';
+import toast from 'react-hot-toast';
 
 export const OfferActions = ({ offer }: { offer: any }) => {
   const [editOpen, setEditOpen] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
+  const [removeImage, setRemoveImage] = useState(false);
   const [loading, setLoading] = useState(false);
   const [confirming, setConfirming] = useState(false);
 
   async function handleDelete() {
     setLoading(true);
     await deleteOffer(offer.id);
+    toast.success('Offer deleted');
     setLoading(false);
     setConfirming(false);
   }
@@ -20,6 +23,7 @@ export const OfferActions = ({ offer }: { offer: any }) => {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     await updateOffer(offer.id, formData);
+    toast.success('Offer updated successfully');
     setLoading(false);
     setEditOpen(false);
   }
@@ -54,13 +58,17 @@ export const OfferActions = ({ offer }: { offer: any }) => {
 
       {editOpen && (
         <div className="fixed inset-0 z-[3000] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-          <div className="bg-surface w-full max-w-xl rounded-xl border border-brand-border p-6 md:p-8 max-h-[90vh] overflow-y-auto relative shadow-2xl">
+          <div className="bg-surface w-full max-w-2xl rounded-xl border border-brand-border p-6 md:p-8 max-h-[90vh] overflow-y-auto relative shadow-2xl">
             <button type="button" onClick={() => setEditOpen(false)} className="absolute top-5 right-5 text-brand-text-dim hover:text-white text-xl leading-none">✕</button>
             <h2 className="text-2xl font-display font-bold text-saffron mb-6 border-b border-brand-border pb-2">Edit Offer</h2>
             <form onSubmit={handleUpdate} className="space-y-4">
               <div>
                 <label className="block text-sm font-bold text-cream mb-1">Offer Title</label>
                 <input name="title" required defaultValue={offer.title} className="w-full bg-surface-2 border border-brand-border rounded p-2 text-sm text-cream" />
+              </div>
+              <div className="mb-4 flex items-center gap-3 bg-surface-2 p-4 rounded-lg border border-brand-border">
+                <input type="checkbox" id="active" name="active" defaultChecked={offer.active !== false} className="w-5 h-5 accent-saffron cursor-pointer" />
+                <label htmlFor="active" className="text-sm font-bold text-cream cursor-pointer">Offer is Active (visible on website)</label>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
@@ -87,16 +95,23 @@ export const OfferActions = ({ offer }: { offer: any }) => {
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-bold text-cream mb-1">Replace Image (Optional)</label>
-                <div className="flex items-center gap-4">
-                  {(preview || offer.image) && (
-                    <img src={preview || offer.image} alt="Preview" className="h-16 rounded-lg object-cover border border-brand-border shrink-0" />
-                  )}
-                  <input type="file" name="imageFile" accept="image/*"
-                    onChange={(e) => { const f = e.target.files?.[0]; setPreview(f ? URL.createObjectURL(f) : null); }}
-                    className="w-full bg-surface-2 border border-brand-border rounded p-2 text-sm text-cream file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-bold file:bg-saffron file:text-black cursor-pointer" />
-                </div>
-                <input type="hidden" name="image" value={offer.image || ''} />
+                <label className="block text-sm font-bold text-cream mb-2">Image (Optional)</label>
+                {!removeImage && (preview || offer.image) && (
+                  <div className="mb-4 relative group">
+                    <img src={preview || offer.image} alt="Preview" className="w-full h-56 rounded-lg object-cover border border-brand-border" />
+                    <button
+                      type="button"
+                      onClick={() => { setPreview(null); setRemoveImage(true); }}
+                      className="absolute top-3 right-3 bg-red-600/90 text-white px-3 py-1.5 text-xs font-bold rounded-lg opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500 shadow-xl"
+                    >
+                      Remove Image
+                    </button>
+                  </div>
+                )}
+                <input type="file" name="imageFile" accept="image/*"
+                  onChange={(e) => { const f = e.target.files?.[0]; setPreview(f ? URL.createObjectURL(f) : null); setRemoveImage(false); }}
+                  className="w-full bg-surface-2 border border-brand-border rounded p-2 text-sm text-cream file:mr-4 file:py-1 file:px-3 file:rounded file:border-0 file:text-xs file:font-bold file:bg-saffron file:text-black cursor-pointer" />
+                <input type="hidden" name="removeImage" value={removeImage.toString()} />
               </div>
               <div>
                 <label className="block text-sm font-bold text-cream mb-1">Description / Items</label>
