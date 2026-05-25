@@ -4,6 +4,22 @@ import { deleteReview, updateReview } from '@/app/actions';
 import toast from 'react-hot-toast';
 import { ReviewImageCropper } from './ReviewImageCropper';
 
+const StarIcon = ({ filled, className = "w-6 h-6" }: { filled: boolean; className?: string }) => (
+  <svg 
+    className={`${className} transition-all duration-200 ${filled ? 'text-saffron fill-saffron' : 'text-brand-text-dim/20 fill-transparent'}`} 
+    stroke="currentColor" 
+    strokeWidth="2"
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      d="M11.48 3.499c.196-.612 1.056-.612 1.252 0l1.834 5.727a.75.75 0 00.713.518h6.019c.643 0 .909.824.39 1.218l-4.87 3.717a.75.75 0 00-.272.838l1.834 5.727c.196.612-.505 1.123-1.018.75l-4.87-3.718a.75.75 0 00-.877 0l-4.87 3.718c-.513.75-1.214.238-1.018-.75l1.834-5.727a.75.75 0 00-.272-.838l-4.87-3.717c-.519-.394-.253-1.218.39-1.218h6.019a.75.75 0 00.713-.518l1.834-5.727z" 
+    />
+  </svg>
+);
+
 export const ReviewActions = ({ review }: { review: any }) => {
   const [editOpen, setEditOpen] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -15,12 +31,14 @@ export const ReviewActions = ({ review }: { review: any }) => {
   const [author, setAuthor] = useState(review.author || '');
   const [source, setSource] = useState(review.source || '');
   const [text, setText] = useState(review.text || '');
+  const [rating, setRating] = useState(review.rating || 5);
 
   useEffect(() => {
     if (editOpen) {
       setAuthor(review.author || '');
       setSource(review.source || '');
       setText(review.text || '');
+      setRating(review.rating || 5);
       setImagePos({ x: review.image_pos_x ?? 50, y: review.image_pos_y ?? 50 });
     }
   }, [review, editOpen]);
@@ -112,6 +130,22 @@ export const ReviewActions = ({ review }: { review: any }) => {
                     {errors.source && <p className="mt-1 text-xs text-red-400">{errors.source}</p>}
                   </div>
                   <div>
+                    <label className="block text-sm font-bold text-cream mb-1">Rating <span className="text-red-400">*</span></label>
+                    <div className="flex items-center gap-1.5 mt-1 py-1">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setRating(star)}
+                          className="transition-transform hover:scale-110 focus:outline-none cursor-pointer"
+                        >
+                          <StarIcon filled={star <= rating} className="w-8 h-8" />
+                        </button>
+                      ))}
+                    </div>
+                    <input type="hidden" name="rating" value={rating} />
+                  </div>
+                  <div>
                     <label className="block text-sm font-bold text-cream mb-1">Review Text <span className="text-red-400">*</span></label>
                     <textarea name="text" rows={5} value={text} onChange={e => setText(e.target.value)} className={`w-full bg-surface-2 border rounded p-2 text-sm text-cream focus:outline-none focus:border-saffron focus:ring-1 focus:ring-saffron ${errors.text ? 'border-red-500' : 'border-brand-border'}`} />
                     {errors.text && <p className="mt-1 text-xs text-red-400">{errors.text}</p>}
@@ -129,6 +163,7 @@ export const ReviewActions = ({ review }: { review: any }) => {
                           author={author}
                           source={source}
                           text={text}
+                          rating={rating}
                           initialX={imagePos.x}
                           initialY={imagePos.y}
                           onPositionChange={(x, y) => setImagePos({ x, y })}

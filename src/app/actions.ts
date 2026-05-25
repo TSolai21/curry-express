@@ -52,6 +52,7 @@ export async function addReview(formData: FormData) {
     image: imagePath,
     image_pos_x: parseFloat(formData.get('imagePosX') as string || '50'),
     image_pos_y: parseFloat(formData.get('imagePosY') as string || '50'),
+    rating: parseInt(formData.get('rating') as string || '5', 10),
   };
 
   const { error } = await supabase.from('reviews').insert([newReview]);
@@ -133,6 +134,7 @@ export async function updateReview(id: string, formData: FormData) {
     source: formData.get('source') as string,
     image_pos_x: parseFloat(formData.get('imagePosX') as string || '50'),
     image_pos_y: parseFloat(formData.get('imagePosY') as string || '50'),
+    rating: parseInt(formData.get('rating') as string || '5', 10),
   };
 
   const removeImage = formData.get('removeImage') === 'true';

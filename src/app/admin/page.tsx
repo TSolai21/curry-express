@@ -48,8 +48,17 @@ export default async function AdminPage() {
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-3 font-bold text-cream whitespace-nowrap">{r.author}</td>
-                      <td className="px-4 py-3 text-saffron whitespace-nowrap">{r.source}</td>
+                      <td className="px-4 py-3">
+                        <div className="font-bold text-cream whitespace-nowrap">{r.author}</div>
+                        <div className="flex gap-0.5 mt-1">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <svg key={star} className={`w-3.5 h-3.5 ${star <= (r.rating || 5) ? 'text-saffron fill-saffron' : 'text-brand-text-dim/20 fill-transparent'}`} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499c.196-.612 1.056-.612 1.252 0l1.834 5.727a.75.75 0 00.713.518h6.019c.643 0 .909.824.39 1.218l-4.87 3.717a.75.75 0 00-.272.838l1.834 5.727c.196.612-.505 1.123-1.018.75l-4.87-3.718a.75.75 0 00-.877 0l-4.87 3.718c-.513.75-1.214.238-1.018-.75l1.834-5.727a.75.75 0 00-.272-.838l-4.87-3.717c-.519-.394-.253-1.218.39-1.218h6.019a.75.75 0 00.713-.518l1.834-5.727z" />
+                            </svg>
+                          ))}
+                        </div>
+                      </td>
+                      <td className="px-4 py-3 text-brand-text-dim whitespace-nowrap">{r.source}</td>
                       <td className="px-4 py-3 text-cream/80 italic max-w-xs truncate">"{r.text}"</td>
                       <td className="px-4 py-3"><ReviewActions review={r} /></td>
                     </tr>
@@ -75,7 +84,17 @@ export default async function AdminPage() {
                     )}
                     <div>
                       <div className="font-bold text-cream text-sm">{r.author}</div>
-                      <div className="text-xs text-saffron">via {r.source}</div>
+                      <div className="flex items-center gap-1.5 mt-0.5">
+                        <span className="text-xs text-saffron">via {r.source}</span>
+                        <span className="text-[10px] text-saffron/50">·</span>
+                        <div className="flex gap-0.5">
+                          {[1, 2, 3, 4, 5].map((star) => (
+                            <svg key={star} className={`w-3 h-3 ${star <= (r.rating || 5) ? 'text-saffron fill-saffron' : 'text-brand-text-dim/20 fill-transparent'}`} stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499c.196-.612 1.056-.612 1.252 0l1.834 5.727a.75.75 0 00.713.518h6.019c.643 0 .909.824.39 1.218l-4.87 3.717a.75.75 0 00-.272.838l1.834 5.727c.196.612-.505 1.123-1.018.75l-4.87-3.718a.75.75 0 00-.877 0l-4.87 3.718c-.513.75-1.214.238-1.018-.75l1.834-5.727a.75.75 0 00-.272-.838l-4.87-3.717c-.519-.394-.253-1.218.39-1.218h6.019a.75.75 0 00.713-.518l1.834-5.727z" />
+                            </svg>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
                   <p className="text-sm text-cream/80 italic line-clamp-3">"{r.text}"</p>
